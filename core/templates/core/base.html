@@ -38,7 +38,11 @@
                   {% else %}
 
                   <li class="nav-item">
-                    <a class="nav-link" href={% url 'login' %}>Ingresar</a>
+                    <a class="nav-link" href="#">Ingresar</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Registrarse</a>
                   </li>
 
                   {% endif %}
@@ -48,6 +52,12 @@
             </div>
           </nav>
 
+
+
+
+    {% block content %}
+    
+    {% endblock %}
     </div>
 
     
