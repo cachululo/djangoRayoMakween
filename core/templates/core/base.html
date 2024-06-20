@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,11 +38,11 @@
                   {% else %}
 
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Ingresar</a>
+                    <a class="nav-link" href={% url 'login' %}>Ingresar</a>
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Registrarse</a>
+                    <a class="nav-link" href={% url 'login' %}>Registrarse</a>
                   </li>
 
                   {% endif %}
