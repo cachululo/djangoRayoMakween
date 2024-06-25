@@ -9,10 +9,10 @@
               <div class="col">
                 Productos
               </div>
-              <div class="col">
+              <div class="col-7">
                 {% include 'carrito/carrocompra.html' %}
                   {% for producto in productoss %}
-                  <div class="card" style="height: 10rem; width: 23rem; margin: 5px 0px;">
+                  <div class="card" style="height: 12rem; width: 25rem; margin: 0px -515px; left: 10%;">
                       <div class="card-body">
                         <h5 class="card-title">{{producto.nombre}}</h5>
                         <p class="card-text">{{producto.categoria}}</p>
@@ -23,5 +23,6 @@
                   {% endfor %}
               </div>
             </div>
-          </div>    </h4>
+          </div>    
+        </h4>
 {% endblock %}
