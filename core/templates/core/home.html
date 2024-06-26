@@ -8,11 +8,9 @@
         {{ user.username | upper}}, Bienvenido
     </h4>
 
-    {% block carrusel %}
-        {% include "./carrusel.html"%}
-    {% endblock %}
+        {% include 'core/carrusel.html'%}
 
-    
+         
 {% endif %}
 {% endblock %}
 
