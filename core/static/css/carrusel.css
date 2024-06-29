@@ -1,0 +1,26 @@
+/* Estilo para las imágenes dentro del carrusel */
+.carousel-image {
+    width: 100%;
+    height: 600px;
+    object-fit: contain; /* Ajusta el tamaño de la imagen al contenedor sin cortar*/
+}
+
+/* Ajustes para el contenedor del carrusel */
+#carouselExampleIndicators {
+    width: 100%; /* Ajusta el ancho al 100% del contenedor principal */
+    margin-top: 20px;
+    background-color: #f2f2f2; /* Cambia el color de fondo aquí */
+    padding: 20px; /* Añade padding para separar las imágenes del borde */
+    border-radius: 10px; /* Añade esquinas redondeadas */
+}
+
+/* Ajustes para los controles del carrusel */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%; /* Ancho de los botones de control */
+}
+
+/* Ajustes para los indicadores del carrusel */
+.carousel-indicators {
+    margin-bottom: 10px; /* Margen inferior opcional */
+}
