@@ -9,6 +9,14 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            {% if show_alert %}
+                alert('Ingresa con una cuenta de administrador');
+                window.location.href = "{% url 'login' %}";
+            {% endif %}
+        });
+    </script>
 </head>
 <body>
     <div class="container mt-5">

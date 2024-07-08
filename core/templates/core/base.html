@@ -35,6 +35,17 @@
             }
         }
     </style>
+    <script>
+        function checkAuthorization() {
+            var username = "{{ user.username }}";
+            if (username !== 'julian') {
+                if (!confirm('No tienes permisos para ver ni modificar la lista de usuarios, ingresa con una cuenta de administrador.')) {
+                    return false; 
+                }
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
 
@@ -55,7 +66,7 @@
                     <a class="nav-link" href="#">Nosotros</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href={% url 'lista_user' %}>Listado Usuarios</a>
+                    <a class="nav-link" href="{% url 'lista_user' %}" onclick="return checkAuthorization();">Listado Usuarios</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href={% url 'tienda' %}>Carrito</a>
