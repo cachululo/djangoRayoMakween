@@ -6,18 +6,34 @@ from django.contrib import messages
 from core.Carrito import Carrito
 from core.models import Producto
 from .forms import CustomUserCreationForm, UserForm
+import requests
+from django.conf import settings
+
+def get_weather(api_key):
+    url = f'https://api.openweathermap.org/data/2.5/weather?q=Santiago,cl&appid={api_key}&units=metric'
+    response = requests.get(url)
+    data = response.json()
+    temperature = data['main']['temp']
+    return temperature
+
+def base_context(request):
+    api_key = settings.OPENWEATHERMAP_API_KEY
+    temperature = get_weather(api_key)
+    return {
+        'temperature': temperature
+    }
 
 @login_required
 def lista_user(request):
     users = User.objects.all()
-    return render(request, 'listar/lista_user.html', {'users': users})
+    return render(request, 'listar/lista_user.html', {'users': users, 'temperature': base_context(request)['temperature']})
 
 def home(request):
-    return render(request, 'core/home.html')
+    return render(request, 'core/home.html', {'temperature': base_context(request)['temperature']})
 
 @login_required
 def productos(request):
-    return render(request, 'core/productos.html')
+    return render(request, 'core/productos.html', {'temperature': base_context(request)['temperature']})
 
 def exit(request):
     logout(request)
@@ -34,12 +50,12 @@ def register(request):
             return redirect('home')
         else:
             data['form'] = user_creation_form
-    return render(request, 'registration/register.html', data)
+    return render(request, 'registration/register.html', {'temperature': base_context(request)['temperature'], **data})
 
 @login_required
 def tienda(request):
     productoss = Producto.objects.all()
-    return render(request, 'carrito/tienda.html', {'productoss': productoss})
+    return render(request, 'carrito/tienda.html', {'productoss': productoss, 'temperature': base_context(request)['temperature']})
 
 def agregar_producto(request, producto_id):
     carrito = Carrito(request)
@@ -74,7 +90,7 @@ def edit_user(request, user_id):
             return redirect('lista_user')
     else:
         form = UserForm(instance=user)
-    return render(request, 'listar/edit_user.html', {'form': form})
+    return render(request, 'listar/edit_user.html', {'form': form, 'temperature': base_context(request)['temperature']})
 
 @login_required
 def delete_user(request, user_id):
@@ -83,4 +99,4 @@ def delete_user(request, user_id):
         user.delete()
         messages.success(request, 'Usuario eliminado con éxito.')
         return redirect('lista_user')
-    return render(request, 'listar/confirm_delete.html', {'user': user})
+    return render(request, 'listar/confirm_delete.html', {'user': user, 'temperature': base_context(request)['temperature']})
