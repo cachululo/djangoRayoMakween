@@ -1,13 +1,67 @@
 {% extends 'core\base.html' %}
 {% block content %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
-<h3>Productos</h3>
+<style>
+    .card .card-img-top {
+        max-width: 100%;
+        border-radius: 5px;
+        height: 700px; 
+      }
 
-<p>Producto 1</p>
-<p>Producto 2</p>
-<p>Producto 3</p>
-<p>Producto 4</p>
-<p>Producto 5</p>
-<p>Producto 6</p>
+      img {
+        width: 250px; 
+        height: 250px; 
+        object-fit: cover;
+    }
+
+</style>   
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+<div class="col">
+  <div class="card">
+    <img src="{% static 'images/repairvert (1).jpg' %}" class="card-img-top" alt="...">
+  </a>
+    <div class="card-body">
+      <h5 class="card-title">Ayleen Guajardo</h5>
+      <p class="card-text">Trabajos de Ayleen Guajardo.</p>
+    </div>
+  </div>
+</div>
+<div class="col">
+  <div class="card">
+    <img src="{% static 'images/repairvert (6).jpg' %}" class="card-img-top" alt="...">
+  </a>
+    <div class="card-body">
+      <h5 class="card-title">Francisco Ormeño</h5>
+      <p class="card-text">Trabajos de Francisco Ormeño.</p>
+    </div>
+  </div>
+</div>
+<div class="col">
+  <div class="card">
+    <img src="{% static 'images/repairvert (4).jpg' %}" class="card-img-top" alt="...">
+  </a>
+    <div class="card-body">
+      <h5 class="card-title">Julián Bahamondes</h5>
+      <p class="card-text">Trabajos de Julián Bahamondes.</p>
+    </div>
+  </div>
+</div>
+<div class="col">
+  <div class="card">
+    <img src="{% static 'images/repairvert (5).jpg' %}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">Diego Acevedo</h5>
+        <p class="card-text">Este es el espacio donde deja los repuestos antiguos.</p>
+    </div>
+  </div>
+</div>
+</div>
+</div>
 
 {% endblock %}

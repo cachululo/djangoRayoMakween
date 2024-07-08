@@ -37,7 +37,7 @@ def lista_user(request):
 def home(request):
     return render(request, 'core/home.html', {'temperature': base_context(request)['temperature']})
 
-@login_required
+
 def productos(request):
     productoss = Producto.objects.all()
     return render(request, 'core/productos.html', {'productoss': productoss, 'temperature': base_context(request)['temperature']})
@@ -60,7 +60,6 @@ def register(request):
             data['form'] = user_creation_form
     return render(request, 'registration/register.html', {'temperature': base_context(request)['temperature'], **data})
 
-@login_required
 def tienda(request):
     productoss = Producto.objects.all()
     return render(request, 'carrito/tienda.html', {'productoss': productoss, 'temperature': base_context(request)['temperature']})
