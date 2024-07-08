@@ -10,8 +10,6 @@
 
         {% include 'core/carrusel.html' %}
     {% endif %}
-
-    <!-- Mostrar mensajes de alerta si existen -->
     {% if messages %}
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {% for message in messages %}
