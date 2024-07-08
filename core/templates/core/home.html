@@ -1,5 +1,6 @@
 {% extends 'core/base.html' %}
 {% block content %}
+{% include 'core/carrusel.html' %}
 <div class="container mt-5">
     <h3>Inicio</h3>
     {% if request.user.is_authenticated %}
@@ -7,8 +8,6 @@
         <h4>
             {{ user.username | upper }}, Bienvenido
         </h4>
-
-        {% include 'core/carrusel.html' %}
     {% endif %}
     {% if messages %}
         <div class="alert alert-danger alert-dismissible fade show" role="alert">

@@ -33,7 +33,7 @@ def lista_user(request):
         messages.error(request, 'No tienes permiso, ingresa con tu cuenta de administrador.')
         return redirect('home')
 
-@login_required
+
 def home(request):
     return render(request, 'core/home.html', {'temperature': base_context(request)['temperature']})
 
