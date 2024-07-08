@@ -10,7 +10,7 @@ import requests
 from django.conf import settings
 
 def get_weather(api_key):
-    url = f'https://api.openweathermap.org/data/2.5/weather?q=Santiago,cl&appid={api_key}&units=metric'
+    url = f'https://api.openweathermap.org/data/2.5/weather?q=Viña%20del%20Mar,cl&appid={api_key}&units=metric'
     response = requests.get(url)
     data = response.json()
     temperature = data['main']['temp']
