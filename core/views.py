@@ -1,20 +1,21 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import User
 from django.contrib import messages
-from core.Carrito import Carrito
+from core.Carrito import Carrito 
 from core.models import Producto
 from .forms import CustomUserCreationForm, UserForm
 import requests
 from django.conf import settings
+from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login
 
 def get_weather(api_key):
     url = f'https://api.openweathermap.org/data/2.5/weather?q=Viña%20del%20Mar,cl&appid={api_key}&units=metric'
     response = requests.get(url)
     data = response.json()
     temperature = data['main']['temp']
-    return round(temperature) 
+    return round(temperature)
 
 def base_context(request):
     api_key = settings.OPENWEATHERMAP_API_KEY
@@ -25,16 +26,23 @@ def base_context(request):
 
 @login_required
 def lista_user(request):
-    users = User.objects.all()
-    return render(request, 'listar/lista_user.html', {'users': users, 'temperature': base_context(request)['temperature']})
+    if request.user.username == 'julian':  
+        users = User.objects.all()
+        return render(request, 'listar/lista_user.html', {'users': users, 'temperature': base_context(request)['temperature']})
+    else:
+        messages.error(request, 'No tienes permiso, ingresa con tu cuenta de administrador.')
+        return redirect('home')
 
+@login_required
 def home(request):
     return render(request, 'core/home.html', {'temperature': base_context(request)['temperature']})
 
 @login_required
 def productos(request):
-    return render(request, 'core/productos.html', {'temperature': base_context(request)['temperature']})
+    productoss = Producto.objects.all()
+    return render(request, 'core/productos.html', {'productoss': productoss, 'temperature': base_context(request)['temperature']})
 
+@login_required
 def exit(request):
     logout(request)
     return redirect('home')
@@ -57,24 +65,28 @@ def tienda(request):
     productoss = Producto.objects.all()
     return render(request, 'carrito/tienda.html', {'productoss': productoss, 'temperature': base_context(request)['temperature']})
 
+@login_required
 def agregar_producto(request, producto_id):
     carrito = Carrito(request)
     producto = Producto.objects.get(id=producto_id)
     carrito.agregar(producto)
     return redirect('tienda')
 
+@login_required
 def eliminar_producto(request, producto_id):
     carrito = Carrito(request)
     producto = Producto.objects.get(id=producto_id)
     carrito.eliminar(producto)
     return redirect('tienda')
 
+@login_required
 def restar_producto(request, producto_id):
     carrito = Carrito(request)
     producto = Producto.objects.get(id=producto_id)
     carrito.restar(producto)
     return redirect('tienda')
 
+@login_required
 def limpiar_carrito(request):
     carrito = Carrito(request)
     carrito.limpiar()
