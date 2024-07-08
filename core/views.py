@@ -14,7 +14,7 @@ def get_weather(api_key):
     response = requests.get(url)
     data = response.json()
     temperature = data['main']['temp']
-    return temperature
+    return round(temperature) 
 
 def base_context(request):
     api_key = settings.OPENWEATHERMAP_API_KEY
