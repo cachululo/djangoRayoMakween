@@ -3,29 +3,34 @@
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
-
 <h3>Carrito</h3>
-    <hr>
-    <h4>
-        <div class="container text-center">
-            <div class="row align-items-start">
-              <div class="col">
-                Productos
-              </div>
-              <div class="col">
-                {% include 'carrito/carrocompra.html' %}
-                  {% for producto in productoss %}
-                  <div class="card" style="height: 12rem; width: 25rem; margin: 0px -515px; left: 10%;">
-                      <div class="card-body">
-                        <h5 class="card-title">{{producto.nombre}}</h5>
-                        <p class="card-text">{{producto.categoria}}</p>
-                        <p class="card-text">{{producto.precio}}</p>
-                        <a href="{% url 'Add' producto.id %}" class="btn btn-primary">Agregar al Carrito</a>
-                      </div>
-                  </div>
-                  {% endfor %}
-              </div>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h4>Productos</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="row">
+                {% for producto in productoss %}
+                <div class="col-12 mb-3">
+                    <div class="card" style="width: 30rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ producto.nombre }}</h5>
+                            <p class="card-text">{{ producto.categoria }}</p>
+                            <p class="card-text">{{ producto.precio }}</p>
+                            <a href="{% url 'Add' producto.id %}" class="btn btn-primary">Agregar al Carrito</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-          </div>    
-        </h4>
+        </div>
+        <div class="col-12 col-md-6">
+            {% include 'carrito/carrocompra.html' %}
+        </div>
+    </div>
+</div>
 {% endblock %}
